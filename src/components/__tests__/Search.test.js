@@ -14,7 +14,8 @@ global.fetch = jest.fn(() => {
     });
 });
 
-it("should render the body component with search", async() => {
+
+it("should search Res List of burger text input", async() => {
     await act(async() => 
         render(
             <BrowserRouter>
@@ -23,6 +24,11 @@ it("should render the body component with search", async() => {
         )
     );
 
+    const cardsBeforeSearch = screen.getAllByTestId("redCard");\
+
+    expect(cardsBeforeSearch.length).toBe(9);
+
+    
     const searchBtn = screen.getByRole("button", { name: "search" });
 
     const searchInput = screen.getByTestId("searchInput");
@@ -33,5 +39,28 @@ it("should render the body component with search", async() => {
 
     const cards = screen.getAllByTestId("resCard");
 
-    expect(cards).toBe(4);
+    expect(cards.length).toBe(4);
+});
+
+it("should filter Top Rated Restaurant", async() => {
+    await act(async() => 
+        render(
+            <BrowserRouter>
+                <Body />
+            </BrowserRouter>
+        )
+    );
+
+    const cardsBeforeFilter = screen.getAllByTestId("redCard");
+
+    expect(cardsBeforeFilter.length).toBe(9);
+
+    
+    const topRatedBtn = screen.getByRole("button", { name: "Top Rated Restaurants" });
+
+    fireEvent.click(topRatedBtn);
+
+    const cardsAfterFilter = screen.getAllByTestId("resCard");
+
+    expect(cardsAfterFilter.length).toBe(4);
 });

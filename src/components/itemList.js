@@ -17,7 +17,7 @@ const ItemList = ({ items }) => {
     <div className="m-0 p-0">
         <div>
             {items.map((item) => (
-            <div className="py-2">
+            <div data-testid="foodItems" className="py-2">
             <div className="mx-3 flex flox-row border-b-2">
                 <div key = {item.card.info.id} className = "w-9/12 flex flex-col">
                     <div className="flex flex-col">
